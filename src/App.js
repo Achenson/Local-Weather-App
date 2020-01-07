@@ -1,60 +1,46 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
-import './App.css';
+import "./App.css";
 
 function App() {
-
-  let latitude;
-  let longitude;
-  let something = 'sth'
   
+  
+  const [latitude, setLatitude] = useState("waiting for response");
+
+  const [longitude, setLongitude] = useState("waiting for response");
 
   useEffect(() => {
-  
-    getLongAndLat()
+    getLocation();
 
-    async function getLongAndLat() {
-      let result = await getLocation()
+    //console.log("TCL: App ->  latitude",  latitude)
+    //console.log("TCL: App -> longitude", longitude)
 
-      
-    
-      //console.log("TCL: App ->  latitude",  latitude)
-      //console.log("TCL: App -> longitude", longitude)
-      
-    
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-          console.log("Geolocation is not supported by this browser.");
-        }
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
       }
-      
-      
-  function showPosition(position) {
-    latitude = position.coords.latitude;
-    console.log("TCL: showPosition -> latitude", latitude)
-    
-    longitude = position.coords.longitude;
-    console.log("TCL: showPosition -> longitude", longitude)
-  }
-
-
-
     }
-    
-  
 
+    function showPosition(position) {
+      setLatitude(position.coords.latitude);
+      console.log("TCL: showPosition -> latitude", latitude);
+
+      setLongitude(position.coords.longitude);
+      console.log("TCL: showPosition -> longitude", longitude);
+    }
   });
 
   return (
     <div className="App">
       <header className="App-header">
-        
         <p>
-         test{latitude}{something}
+          latitude - {latitude}
         </p>
-     
+        <p>
+          longitude - {longitude}
+        </p>
       </header>
     </div>
   );
