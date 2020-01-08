@@ -9,6 +9,7 @@ function App() {
 
   const [longitude, setLongitude] = useState("waiting for response");
 
+  //getting longitude and latitude from navigator.geolocation
   useEffect(() => {
     getLocation();
 
@@ -31,9 +32,30 @@ function App() {
       console.log("TCL: showPosition -> longitude", longitude);
     }
   });
+  //fetching data from the API using longitude and latidue
+  useEffect(() => {
+
+    let myURL = `https://fcc-weather-api.glitch.me/api/current?lon=${longitude}&lat=${latitude}`
+
+    fetch(myURL)
+      .then(res => res.json())
+      .then(data => {
+        console.log(JSON.stringify(data, null ,2))
+        console.log(data.name)
+
+      })
+
+
+    
+
+  })
+
 
   return (
-    <div className="App">
+    <div style={{ textAlign: "center" }} className="App">
+      <h1>
+        Local Weather App
+      </h1>
       <header className="App-header">
         <p>
           latitude - {latitude}
