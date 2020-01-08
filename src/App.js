@@ -3,9 +3,50 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [latitude, setLatitude] = useState(123);
+  const [latitude, setLatitude] = useState("waiting for server response...");
 
-  const [longitude, setLongitude] = useState(345);
+  const [longitude, setLongitude] = useState("waiting for server response...");
+
+  const [region, setRegion] = useState("waiting for server response...");
+
+  const [country, setCountry] = useState("waiting for server response...");
+
+  const [temperature, setTemperature] = useState(
+    null
+  );
+
+    const [tempUnit, setTempUnit] = useState(
+      "C"
+    )
+
+  const [weather, setWeather] = useState("waiting for server response...");
+
+
+
+  function changeTemperature() {
+
+
+
+    if (tempUnit === 'C') {
+      setTemperature(temperature * 1.8 + 32)
+      setTempUnit('F')
+    }
+
+    if(tempUnit === "F") {
+      setTemperature(temperature/1.8 - 32)
+      setTempUnit('C')
+    }
+
+    }
+
+    //tempUnit === 'C' ? setTempUnit('F') : setTempUnit('C')
+
+
+
+  
+
+
+
 
   //getting longitude and latitude from navigator.geolocation
   useEffect(() => {
@@ -31,23 +72,23 @@ function App() {
       }
     })
       .then(function(result) {
-     
-        console.log(result.latitude);
-        console.log(result.longitude);
-
-        setLongitude(result.longitude)
-        setLatitude(result.latitude)
+        setLongitude(result.longitude);
+        setLatitude(result.latitude);
 
         return `https://fcc-weather-api.glitch.me/api/current?lon=${result.longitude}&lat=${result.latitude}`;
       })
       .then(function(myURL) {
-        fetch(myURL) 
+        fetch(myURL)
           .then(res => res.json())
           .then(data => {
             console.log(JSON.stringify(data, null, 2));
             console.log("data name");
             console.log(data.name);
             console.log(data.sys.country);
+            setRegion(data.name);
+            setCountry(data.sys.country);
+            setTemperature(data.main.temp);
+            setWeather(data.weather[0].main);
           });
       });
 
@@ -62,6 +103,10 @@ function App() {
       <header className="App-header">
         <p>latitude - {latitude}</p>
         <p>longitude - {longitude}</p>
+        <p>region - {region}</p>
+        <p>country - {country}</p>
+        <p>temperature - {temperature} &#176;<button id="btnUnit" onClick ={() => changeTemperature()}>{tempUnit}</button></p>
+        <p>weather - {weather}</p>
       </header>
     </div>
   );
