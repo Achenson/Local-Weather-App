@@ -11,42 +11,29 @@ function App() {
 
   const [country, setCountry] = useState("waiting for server response...");
 
-  const [temperature, setTemperature] = useState(
-    null
-  );
+  const [temperature, setTemperature] = useState(null);
 
-    const [tempUnit, setTempUnit] = useState(
-      "C"
-    )
+  const [tempCelcius, setTempCelcius] = useState(null);
+
+  const [tempUnit, setTempUnit] = useState("C");
 
   const [weather, setWeather] = useState("waiting for server response...");
 
-
+  let tempFahrenheit = temperature * 1.8 + 32;
 
   function changeTemperature() {
-
-
-
-    if (tempUnit === 'C') {
-      setTemperature(temperature * 1.8 + 32)
-      setTempUnit('F')
+    if (tempUnit === "C") {
+      setTemperature(tempFahrenheit);
+      setTempUnit("F");
     }
 
-    if(tempUnit === "F") {
-      setTemperature(temperature/1.8 - 32)
-      setTempUnit('C')
+    if (tempUnit === "F") {
+      setTemperature(tempCelcius);
+      setTempUnit("C");
     }
+  }
 
-    }
-
-    //tempUnit === 'C' ? setTempUnit('F') : setTempUnit('C')
-
-
-
-  
-
-
-
+  //tempUnit === 'C' ? setTempUnit('F') : setTempUnit('C')
 
   //getting longitude and latitude from navigator.geolocation
   useEffect(() => {
@@ -88,6 +75,7 @@ function App() {
             setRegion(data.name);
             setCountry(data.sys.country);
             setTemperature(data.main.temp);
+            setTempCelcius(data.main.temp);
             setWeather(data.weather[0].main);
           });
       });
@@ -105,7 +93,12 @@ function App() {
         <p>longitude - {longitude}</p>
         <p>region - {region}</p>
         <p>country - {country}</p>
-        <p>temperature - {temperature} &#176;<button id="btnUnit" onClick ={() => changeTemperature()}>{tempUnit}</button></p>
+        <p>
+          temperature - {temperature} &#176;
+          <button id="btnUnit" onClick={() => changeTemperature()}>
+            {tempUnit}
+          </button>
+        </p>
         <p>weather - {weather}</p>
       </header>
     </div>
