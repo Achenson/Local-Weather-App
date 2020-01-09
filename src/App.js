@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
+import "./App.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { faCloud } from "@fortawesome/free-solid-svg-icons";
 import { faCloudRain } from "@fortawesome/free-solid-svg-icons";
 import { faCloudShowersHeavy } from "@fortawesome/free-solid-svg-icons";
 import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
 import { faSun } from "@fortawesome/free-solid-svg-icons";
 import { faBolt } from "@fortawesome/free-solid-svg-icons";
-import "./App.css";
+import { faSmog } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [latitude, setLatitude] = useState("waiting for server response...");
@@ -25,6 +26,16 @@ function App() {
   const [tempUnit, setTempUnit] = useState("C");
 
   const [weather, setWeather] = useState("waiting for server response...");
+
+  const [weatherIcons, setWeatherIcons] = useState({
+    sun: "none",
+    cloud: "none",
+    lightRain: "none",
+    heavyRain: "none",
+    bolt: "none",
+    snow: "none",
+    mist: 'mist'
+  });
 
   let tempFahrenheit = temperature * 1.8 + 32;
 
@@ -84,6 +95,44 @@ function App() {
             setTemperature(data.main.temp);
             setTempCelcius(data.main.temp);
             setWeather(data.weather[0].main);
+
+            let weatherIconsObj = {
+              sun: "none",
+              cloud: "none",
+              lightRain: "none",
+              heavyRain: "none",
+              bolt: "none",
+              snow: "none",
+              mist: "none"
+            };
+
+            switch (data.weather[0].main) {
+              case "Clear":
+                weatherIconsObj.sun = "block";
+                break;
+              case "Clouds":
+                weatherIconsObj.cloud = "block";
+                break;
+              case "Drizzle":
+                weatherIconsObj.lightRain = "block";
+                break;
+              case "Rain":
+                weatherIconsObj.heavyRain = "block";
+                break;
+              case "Thunderstorm":
+                weatherIconsObj.bolt = "block";
+                break;
+              case "Snow":
+                weatherIconsObj.snow = "block";
+                break;
+              case "Mist":
+                weatherIconsObj.mist = "block";
+                break;
+              default:
+                console.log("no weather info");
+            }
+
+            setWeatherIcons(weatherIconsObj);
           });
       });
 
@@ -112,12 +161,48 @@ function App() {
           <p>weather - {weather}</p>
         </div>
         <div className="weather-icons">
-          <FontAwesomeIcon icon={faSun} size="4x"  className="weather-icon" style={{color: "gold"}}/>
-          <FontAwesomeIcon icon={faCloud} size="4x"  className="weather-icon" style={{color: "darkgray"}}/>
-          <FontAwesomeIcon icon={faCloudRain} size="4x"  className="weather-icon" style={{color: "blue"}} />
-          <FontAwesomeIcon icon={faCloudShowersHeavy} size="4x"  className="weather-icon" style={{color: "darkblue"}}/>
-          <FontAwesomeIcon icon={faBolt} size="4x" className="weather-icon" style={{color: "orange"}}/>
-          <FontAwesomeIcon icon={faSnowflake} size="4x" className="weather-icon" style={{color: "lightblue"}}/>
+          <FontAwesomeIcon
+            icon={faSun}
+            size="4x"
+            className="weather-icon sun"
+            style={{ display: `${weatherIcons.sun}` }}
+          />
+          <FontAwesomeIcon
+            icon={faCloud}
+            size="4x"
+            className="weather-icon cloud"
+            style={{ display: `${weatherIcons.cloud}` }}
+          />
+          <FontAwesomeIcon
+            icon={faCloudRain}
+            size="4x"
+            className="weather-icon light-rain"
+            style={{ display: `${weatherIcons.lightRain}` }}
+          />
+          <FontAwesomeIcon
+            icon={faCloudShowersHeavy}
+            size="4x"
+            className="weather-icon heavy-rain"
+            style={{ display: `${weatherIcons.heavyRain}` }}
+          />
+          <FontAwesomeIcon
+            icon={faBolt}
+            size="4x"
+            className="weather-icon bolt"
+            style={{ display: `${weatherIcons.bolt}` }}
+          />
+          <FontAwesomeIcon
+            icon={faSnowflake}
+            size="4x"
+            className="weather-icon snow"
+            style={{ display: `${weatherIcons.snow}` }}
+          />
+            <FontAwesomeIcon
+            icon={faSmog}
+            size="4x"
+            className="weather-icon mist"
+            style={{ display: `${weatherIcons.mist}` }}
+          />
         </div>
       </main>
     </div>

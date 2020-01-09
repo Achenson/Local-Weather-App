@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   font-family: arial, sans-serif;
 }
 
@@ -7,12 +8,36 @@ html, body {
   margin: auto;
 }
 
+.sun {
+  color: gold;
+}
+.cloud {
+  color: darkslategray;
+}
 
+.light-rain {
+  color: blue;
+}
 
+.heavy-rain {
+  color: darkblue;
+}
+
+.bolt {
+  color: orange;
+}
+
+.snow {
+  color: lightblue;
+}
+
+.mist {
+  color: darkslategray;
+}
 #btnUnit {
-  background: none!important;
+  background: none !important;
   border: none;
-  padding: 0!important;
+  padding: 0 !important;
   /*optional*/
   font-family: arial, sans-serif;
   /*input has OS specific font-family*/
