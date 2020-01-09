@@ -2,6 +2,10 @@ html, body {
   font-family: arial, sans-serif;
 }
 
+.weather-icon {
+  display: block;
+  margin: auto;
+}
 
 
 

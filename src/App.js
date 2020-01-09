@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faCloud } from "@fortawesome/free-solid-svg-icons";
+import { faCloudRain } from "@fortawesome/free-solid-svg-icons";
+import { faCloudShowersHeavy } from "@fortawesome/free-solid-svg-icons";
+import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
+import { faSun } from "@fortawesome/free-solid-svg-icons";
+import { faBolt } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 
 function App() {
@@ -87,22 +94,51 @@ function App() {
 
   return (
     <div style={{ textAlign: "center" }} className="App">
-      <h1>Local Weather App</h1>
       <header className="App-header">
-        <p>latitude - {latitude}</p>
-        <p>longitude - {longitude}</p>
-        <p>region - {region}</p>
-        <p>country - {country}</p>
-        <p>
-          temperature - {temperature} &#176;
-          <button id="btnUnit" onClick={() => changeTemperature()}>
-            {tempUnit}
-          </button>
-        </p>
-        <p>weather - {weather}</p>
+        <h1>Local Weather App</h1>
       </header>
+      <main>
+        <div>
+          <p>latitude - {latitude}</p>
+          <p>longitude - {longitude}</p>
+          <p>region - {region}</p>
+          <p>country - {country}</p>
+          <p>
+            temperature - {temperature} &#176;
+            <button id="btnUnit" onClick={() => changeTemperature()}>
+              {tempUnit}
+            </button>
+          </p>
+          <p>weather - {weather}</p>
+        </div>
+        <div className="weather-icons">
+          <FontAwesomeIcon icon={faSun} size="4x"  className="weather-icon" style={{color: "gold"}}/>
+          <FontAwesomeIcon icon={faCloud} size="4x"  className="weather-icon" style={{color: "darkgray"}}/>
+          <FontAwesomeIcon icon={faCloudRain} size="4x"  className="weather-icon" style={{color: "blue"}} />
+          <FontAwesomeIcon icon={faCloudShowersHeavy} size="4x"  className="weather-icon" style={{color: "darkblue"}}/>
+          <FontAwesomeIcon icon={faBolt} size="4x" className="weather-icon" style={{color: "orange"}}/>
+          <FontAwesomeIcon icon={faSnowflake} size="4x" className="weather-icon" style={{color: "lightblue"}}/>
+        </div>
+      </main>
     </div>
   );
 }
 
 export default App;
+
+/* 
+
+
+    case 'drizzle':
+     
+    case 'clouds':
+      
+    case 'rain':
+     
+    case 'snow':
+     
+    case 'clear':
+     
+    case 'thunderstom':
+ 
+*/
