@@ -12,25 +12,11 @@ import { faSmog } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [latitude, setLatitude] = useState("waiting for server response...");
-
   const [longitude, setLongitude] = useState("waiting for server response...");
-
   const [region, setRegion] = useState("waiting for server response...");
-
   const [country, setCountry] = useState("waiting for server response...");
 
-  const [temperature, setTemperature] = useState(null);
-
-  const [feelsLike, setFeelsLike] = useState(null);
-
-  const [tempCelcius, setTempCelcius] = useState(null);
-
-  const [tempCelciusFeelsLike, setTempCelciusFeelsLike] = useState(null);
-
-  const [tempUnit, setTempUnit] = useState("C");
-
   const [weather, setWeather] = useState("waiting for server response...");
-
   const [weatherIcons, setWeatherIcons] = useState({
     sun: "none",
     cloud: "none",
@@ -41,6 +27,12 @@ function App() {
     mist: "mist"
   });
 
+  const [temperature, setTemperature] = useState(null);
+  const [feelsLike, setFeelsLike] = useState(null);
+  const [tempUnit, setTempUnit] = useState("C");
+  //for button changing C/F
+  const [tempCelcius, setTempCelcius] = useState(null);
+  const [tempCelciusFeelsLike, setTempCelciusFeelsLike] = useState(null);
   let tempFahrenheit = temperature * 1.8 + 32;
   let tempFahrenheitFeelsLike = feelsLike * 1.8 + 32;
 
@@ -48,21 +40,19 @@ function App() {
     if (tempUnit === "C") {
       setTemperature(tempFahrenheit);
       setTempUnit("F");
-      setFeelsLike(tempFahrenheitFeelsLike)
+      setFeelsLike(tempFahrenheitFeelsLike);
     }
 
     if (tempUnit === "F") {
       setTemperature(tempCelcius);
       setTempUnit("C");
-      setFeelsLike(tempCelciusFeelsLike)
+      setFeelsLike(tempCelciusFeelsLike);
     }
   }
 
-  //tempUnit === 'C' ? setTempUnit('F') : setTempUnit('C')
-
-  //getting longitude and latitude from navigator.geolocation
   useEffect(() => {
     new Promise(function(resolve, reject) {
+      //getting longitude and latitude from navigator.geolocation
       getLocation();
 
       function getLocation() {
@@ -77,7 +67,6 @@ function App() {
         let resultObj = {};
 
         resultObj.latitude = position.coords.latitude;
-
         resultObj.longitude = position.coords.longitude;
 
         resolve(resultObj);
@@ -89,6 +78,7 @@ function App() {
 
         return `https://fcc-weather-api.glitch.me/api/current?lon=${result.longitude}&lat=${result.latitude}`;
       })
+      //fetching data from freeCodeCamp API
       .then(function(myURL) {
         fetch(myURL)
           .then(res => res.json())
@@ -145,10 +135,9 @@ function App() {
           });
       });
 
-    //console.log("TCL: App ->  latitude",  latitude)
-    //console.log("TCL: App -> longitude", longitude)
+    //[] is passed to run useEffect only on first render
   }, []);
-  //fetching data from the API using longitude and latidue
+  
 
   return (
     <div style={{ textAlign: "center" }} className="App">
@@ -156,65 +145,75 @@ function App() {
         <h1>Local Weather App</h1>
       </header>
       <main>
-        <div>
-          <p>latitude - {latitude}</p>
-          <p>longitude - {longitude}</p>
-          <p>region - {region}</p>
-          <p>country - {country}</p>
-          <p>
-            temperature - {temperature} &#176;
-            <button className="btn-unit" onClick={() => changeTemperature()}>
+        <div className="align-on-hyphen">
+          <div>
+            <span>latitude</span> - <span>{latitude}</span>
+          </div>
+          <div>
+            <span>longitude</span> - <span>{longitude}</span>
+          </div>
+          <div>
+            <span>region</span> - <span>{region}</span>
+          </div>
+          <div>
+            <span>country</span> - <span>{country}</span>
+          </div>
+          <div>
+            <span>temperature</span> - <span>{temperature} &#176;<button className="btn-unit" onClick={() => changeTemperature()}>
               {tempUnit}
-            </button>
-          </p>
-          <p>
-            feels like - {feelsLike} &#176;
-            <button className="btn-unit" onClick={() => changeTemperature()}>
+            </button></span>
+           
+          </div>
+          <div>
+            <span>feels like</span> - <span>{feelsLike} &#176;<button className="btn-unit" onClick={() => changeTemperature()}>
               {tempUnit}
-            </button>
-          </p>
-          <p>weather - {weather}</p>
+            </button></span>
+          
+          </div>
+          <div>
+            <span>weather</span> - <span>{weather}</span>
+          </div>
         </div>
         <div className="weather-icons">
           <FontAwesomeIcon
             icon={faSun}
-            size="4x"
+            size="5x"
             className="weather-icon sun"
             style={{ display: `${weatherIcons.sun}` }}
           />
           <FontAwesomeIcon
             icon={faCloud}
-            size="4x"
+            size="5x"
             className="weather-icon cloud"
             style={{ display: `${weatherIcons.cloud}` }}
           />
           <FontAwesomeIcon
             icon={faCloudRain}
-            size="4x"
+            size="5x"
             className="weather-icon light-rain"
             style={{ display: `${weatherIcons.lightRain}` }}
           />
           <FontAwesomeIcon
             icon={faCloudShowersHeavy}
-            size="4x"
+            size="5x"
             className="weather-icon heavy-rain"
             style={{ display: `${weatherIcons.heavyRain}` }}
           />
           <FontAwesomeIcon
             icon={faBolt}
-            size="4x"
+            size="5x"
             className="weather-icon bolt"
             style={{ display: `${weatherIcons.bolt}` }}
           />
           <FontAwesomeIcon
             icon={faSnowflake}
-            size="4x"
+            size="5x"
             className="weather-icon snow"
             style={{ display: `${weatherIcons.snow}` }}
           />
           <FontAwesomeIcon
             icon={faSmog}
-            size="4x"
+            size="5x"
             className="weather-icon mist"
             style={{ display: `${weatherIcons.mist}` }}
           />
