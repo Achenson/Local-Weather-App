@@ -34,7 +34,7 @@ body {
 .mist {
   color: darkslategray;
 }
-#btnUnit {
+.btn-unit {
   background: none !important;
   border: none;
   padding: 0 !important;
@@ -46,6 +46,6 @@ body {
   cursor: pointer;
 }
 
-#btnUnit:hover {
+.btn-unit:hover {
   color: darkblue;
 }

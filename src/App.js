@@ -21,7 +21,11 @@ function App() {
 
   const [temperature, setTemperature] = useState(null);
 
+  const [feelsLike, setFeelsLike] = useState(null);
+
   const [tempCelcius, setTempCelcius] = useState(null);
+
+  const [tempCelciusFeelsLike, setTempCelciusFeelsLike] = useState(null);
 
   const [tempUnit, setTempUnit] = useState("C");
 
@@ -34,20 +38,23 @@ function App() {
     heavyRain: "none",
     bolt: "none",
     snow: "none",
-    mist: 'mist'
+    mist: "mist"
   });
 
   let tempFahrenheit = temperature * 1.8 + 32;
+  let tempFahrenheitFeelsLike = feelsLike * 1.8 + 32;
 
   function changeTemperature() {
     if (tempUnit === "C") {
       setTemperature(tempFahrenheit);
       setTempUnit("F");
+      setFeelsLike(tempFahrenheitFeelsLike)
     }
 
     if (tempUnit === "F") {
       setTemperature(tempCelcius);
       setTempUnit("C");
+      setFeelsLike(tempCelciusFeelsLike)
     }
   }
 
@@ -94,6 +101,8 @@ function App() {
             setCountry(data.sys.country);
             setTemperature(data.main.temp);
             setTempCelcius(data.main.temp);
+            setFeelsLike(data.main.feels_like);
+            setTempCelciusFeelsLike(data.main.feels_like);
             setWeather(data.weather[0].main);
 
             let weatherIconsObj = {
@@ -138,7 +147,7 @@ function App() {
 
     //console.log("TCL: App ->  latitude",  latitude)
     //console.log("TCL: App -> longitude", longitude)
-  }, [longitude, latitude]);
+  }, []);
   //fetching data from the API using longitude and latidue
 
   return (
@@ -154,7 +163,13 @@ function App() {
           <p>country - {country}</p>
           <p>
             temperature - {temperature} &#176;
-            <button id="btnUnit" onClick={() => changeTemperature()}>
+            <button className="btn-unit" onClick={() => changeTemperature()}>
+              {tempUnit}
+            </button>
+          </p>
+          <p>
+            feels like - {feelsLike} &#176;
+            <button className="btn-unit" onClick={() => changeTemperature()}>
               {tempUnit}
             </button>
           </p>
@@ -197,7 +212,7 @@ function App() {
             className="weather-icon snow"
             style={{ display: `${weatherIcons.snow}` }}
           />
-            <FontAwesomeIcon
+          <FontAwesomeIcon
             icon={faSmog}
             size="4x"
             className="weather-icon mist"
