@@ -36,16 +36,12 @@ body {
   color: darkslategray;
 }
 
-
 .btn-unit {
   background: none !important;
   border: none;
   padding: 0 !important;
-  /*optional*/
-  font-family: arial, sans-serif;
-  /*input has OS specific font-family*/
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #069;
-  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -54,13 +50,12 @@ body {
 }
 
 h1 {
-  font-weight: bold;
   font-size: 2.5rem;
   color: firebrick;
 }
 
-
-.align-on-hyphen p, .btn-unit {
+.align-on-hyphen p,
+.btn-unit {
   font-size: 1.2rem;
 }
 
@@ -68,23 +63,17 @@ h1 {
   display: flex;
   font-size: 1.2rem;
   color: indianred;
-}  
+}
 
 .align-on-hyphen p span {
   flex: 1;
 }
 
 .align-on-hyphen p span:first-of-type {
- text-align: right;
- 
+  text-align: right;
 }
-
 
 .align-on-hyphen p span:last-of-type {
   text-align: left;
   padding-left: 5px;
- }
- 
-
-
-
+}

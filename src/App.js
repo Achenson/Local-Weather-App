@@ -13,10 +13,11 @@ import { faSmog } from "@fortawesome/free-solid-svg-icons";
 function App() {
   const [latitude, setLatitude] = useState("waiting for server response...");
   const [longitude, setLongitude] = useState("waiting for server response...");
+
   const [region, setRegion] = useState("waiting for server response...");
   const [country, setCountry] = useState("waiting for server response...");
-
   const [weather, setWeather] = useState("waiting for server response...");
+
   const [weatherIcons, setWeatherIcons] = useState({
     sun: "none",
     cloud: "none",
@@ -33,8 +34,8 @@ function App() {
   //for button changing C/F
   const [tempCelcius, setTempCelcius] = useState(null);
   const [tempCelciusFeelsLike, setTempCelciusFeelsLike] = useState(null);
-  let tempFahrenheit = Math.round((temperature * 1.8 + 32)*100)/100;
-  let tempFahrenheitFeelsLike = Math.round((feelsLike * 1.8 + 32)*100)/100;
+  let tempFahrenheit = Math.round((temperature * 1.8 + 32) * 100) / 100;
+  let tempFahrenheitFeelsLike = Math.round((feelsLike * 1.8 + 32) * 100) / 100;
 
   function changeTemperature() {
     if (tempUnit === "C") {
@@ -137,7 +138,6 @@ function App() {
 
     //[] is passed to run useEffect only on first render
   }, []);
-  
 
   return (
     <div style={{ textAlign: "center" }} className="App">
@@ -159,16 +159,22 @@ function App() {
             <span>country</span>: <span>{country}</span>
           </p>
           <p>
-            <span>temperature</span>: <span>{temperature} &#176;<button className="btn-unit" onClick={() => changeTemperature()}>
-              {tempUnit}
-            </button></span>
-           
+            <span>temperature</span>:{" "}
+            <span>
+              {temperature} &#176;
+              <button className="btn-unit" onClick={() => changeTemperature()}>
+                {tempUnit}
+              </button>
+            </span>
           </p>
           <p>
-            <span>feels like</span>: <span>{feelsLike} &#176;<button className="btn-unit" onClick={() => changeTemperature()}>
-              {tempUnit}
-            </button></span>
-          
+            <span>feels like</span>:{" "}
+            <span>
+              {feelsLike} &#176;
+              <button className="btn-unit" onClick={() => changeTemperature()}>
+                {tempUnit}
+              </button>
+            </span>
           </p>
           <p>
             <span>weather</span>: <span>{weather}</span>
@@ -224,22 +230,3 @@ function App() {
 }
 
 export default App;
-
-/* 
-
-
-    case 'drizzle':
-     
-    case 'clouds':
-      
-    case 'rain':
-     
-    case 'snow':
-     
-    case 'clear':
-     
-    case 'thunderstom':
-    
-    case 'mist';
- 
-*/
