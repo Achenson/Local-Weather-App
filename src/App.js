@@ -33,8 +33,8 @@ function App() {
   //for button changing C/F
   const [tempCelcius, setTempCelcius] = useState(null);
   const [tempCelciusFeelsLike, setTempCelciusFeelsLike] = useState(null);
-  let tempFahrenheit = temperature * 1.8 + 32;
-  let tempFahrenheitFeelsLike = feelsLike * 1.8 + 32;
+  let tempFahrenheit = Math.round((temperature * 1.8 + 32)*100)/100;
+  let tempFahrenheitFeelsLike = Math.round((feelsLike * 1.8 + 32)*100)/100;
 
   function changeTemperature() {
     if (tempUnit === "C") {
@@ -104,7 +104,7 @@ function App() {
               snow: "none",
               mist: "none"
             };
-
+            //display for particular icon will be switch from none to block
             switch (data.weather[0].main) {
               case "Clear":
                 weatherIconsObj.sun = "block";
@@ -146,33 +146,33 @@ function App() {
       </header>
       <main>
         <div className="align-on-hyphen">
-          <div>
-            <span>latitude</span> - <span>{latitude}</span>
-          </div>
-          <div>
-            <span>longitude</span> - <span>{longitude}</span>
-          </div>
-          <div>
-            <span>region</span> - <span>{region}</span>
-          </div>
-          <div>
-            <span>country</span> - <span>{country}</span>
-          </div>
-          <div>
-            <span>temperature</span> - <span>{temperature} &#176;<button className="btn-unit" onClick={() => changeTemperature()}>
+          <p>
+            <span>latitude</span>: <span>{latitude}</span>
+          </p>
+          <p>
+            <span>longitude</span>: <span>{longitude}</span>
+          </p>
+          <p>
+            <span>region</span>: <span>{region}</span>
+          </p>
+          <p>
+            <span>country</span>: <span>{country}</span>
+          </p>
+          <p>
+            <span>temperature</span>: <span>{temperature} &#176;<button className="btn-unit" onClick={() => changeTemperature()}>
               {tempUnit}
             </button></span>
            
-          </div>
-          <div>
-            <span>feels like</span> - <span>{feelsLike} &#176;<button className="btn-unit" onClick={() => changeTemperature()}>
+          </p>
+          <p>
+            <span>feels like</span>: <span>{feelsLike} &#176;<button className="btn-unit" onClick={() => changeTemperature()}>
               {tempUnit}
             </button></span>
           
-          </div>
-          <div>
-            <span>weather</span> - <span>{weather}</span>
-          </div>
+          </p>
+          <p>
+            <span>weather</span>: <span>{weather}</span>
+          </p>
         </div>
         <div className="weather-icons">
           <FontAwesomeIcon
@@ -239,5 +239,7 @@ export default App;
     case 'clear':
      
     case 'thunderstom':
+    
+    case 'mist';
  
 */

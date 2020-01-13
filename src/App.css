@@ -1,6 +1,7 @@
 html,
 body {
-  font-family: arial, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: whitesmoke;
 }
 
 .weather-icon {
@@ -34,6 +35,8 @@ body {
 .mist {
   color: darkslategray;
 }
+
+
 .btn-unit {
   background: none !important;
   border: none;
@@ -49,3 +52,39 @@ body {
 .btn-unit:hover {
   color: darkblue;
 }
+
+h1 {
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: firebrick;
+}
+
+
+.align-on-hyphen p, .btn-unit {
+  font-size: 1.2rem;
+}
+
+.align-on-hyphen p {
+  display: flex;
+  font-size: 1.2rem;
+  color: indianred;
+}  
+
+.align-on-hyphen p span {
+  flex: 1;
+}
+
+.align-on-hyphen p span:first-of-type {
+ text-align: right;
+ 
+}
+
+
+.align-on-hyphen p span:last-of-type {
+  text-align: left;
+  padding-left: 5px;
+ }
+ 
+
+
+
