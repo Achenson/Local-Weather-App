@@ -25,7 +25,7 @@ function App() {
     heavyRain: "none",
     bolt: "none",
     snow: "none",
-    mist: "mist"
+    mist: "none"
   });
 
   const [temperature, setTemperature] = useState(null);
